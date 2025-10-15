@@ -1,14 +1,19 @@
 #!/bin/bash
 yum update -y
 
-# Install Docker
-amazon-linux-extras install docker -y
-service docker start
-usermod -a -G docker ec2-user
-
-# Install .NET (SDK 7 for example)
+# Install AWS CLI and .NET
+yum install -y unzip
 rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
 yum install -y dotnet-sdk-7.0
 
-# Optional: Start a sample container or app
-docker run -d -p 80:80 nginx
+# Install AWS CLI
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+# Download app files from S3 (assuming you've uploaded to S3 manually or via CI/CD)
+aws s3 cp s3://your-bucket-name/ /var/dotnetapp/ --recursive
+
+# Run the app (e.g., ASP.NET Core)
+cd /var/dotnetapp
+dotnet YourApp.dll

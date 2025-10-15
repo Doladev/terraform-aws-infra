@@ -1,9 +1,11 @@
 output "ec2_public_ip" {
-  value = aws_instance.web_server.public_ip
-  description = "Public IP of EC2 instance"
+  value = aws_eip.ip.public_ip
 }
 
-output "private_key_path" {
-  value = local_file.private_key.filename
-  description = "Path to your private key"
+output "rds_endpoint" {
+  value = aws_db_instance.db.endpoint
+}
+
+output "s3_bucket_name" {
+  value = aws_s3_bucket.app_bucket.id
 }
