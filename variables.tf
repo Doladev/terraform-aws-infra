@@ -11,14 +11,10 @@ variable "ami_id" {
   default     = "ami-0336cdd409ab5eec4" # Valid for eu-west-2
 }
 
-variable "project_prefix" {
-  default = "my-dotnet"
-}
-
 variable "db_username" {
   default = "admin"
 }
 
 variable "db_password" {
-  default = "MyStrongPass123!"
+  default = "MyStrongPass123!" #For local development purpose only
 }
